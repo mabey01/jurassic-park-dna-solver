@@ -3,7 +3,6 @@ import { Move, MoveType } from "../../apply-move-to-grid/moves";
 import { getAllNeighborObjects } from "../get-all-neighbors/get-all-neighbors";
 import { Node } from "../node";
 import { getManhattenDistance } from "../../tile-grid/get-manhatten-distance/get-manhatten-distance";
-import { isEqual } from "../../tile-grid/is-equal/is-equal";
 
 function bySmallestG(a: Node, b: Node) {
   return a.f - b.f;
@@ -17,6 +16,7 @@ export function getShortestSolveMoves(
   const openList: Node[] = [];
   const closedList: Node[] = [];
 
+  const targetNode = new Node(targetGrid, []);
   const startingNode = new Node(originGrid, []);
   openList.push(startingNode);
 
@@ -24,7 +24,7 @@ export function getShortestSolveMoves(
     const currentNode = openList.sort(bySmallestG).shift()!;
     closedList.push(currentNode);
 
-    if (isEqual(currentNode.grid, targetGrid)) {
+    if (currentNode.isEqual(targetNode)) {
       return currentNode.path;
     }
 
@@ -37,7 +37,7 @@ export function getShortestSolveMoves(
 
       if (
         closedList.some((closedListNode) =>
-          isEqual(closedListNode.grid, neighborNode.grid)
+          closedListNode.isEqual(neighborNode)
         )
       ) {
         continue;
@@ -48,8 +48,9 @@ export function getShortestSolveMoves(
       neighborNode.f = neighborNode.g + neighborNode.h;
 
       const sameOpenListNode = openList.find((openListNode) =>
-        isEqual(openListNode.grid, neighborNode.grid)
+        openListNode.isEqual(neighborNode)
       );
+
       if (sameOpenListNode) {
         if (neighborNode.g > sameOpenListNode.g) {
           continue;

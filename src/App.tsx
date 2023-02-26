@@ -1,10 +1,12 @@
 import { useAtom, useAtomValue } from "jotai";
+import { useEffect } from "react";
 import { Grid } from "./components/grid";
 import { Move } from "./components/move";
 import { Moves } from "./components/moves";
 import { useSolveGrid } from "./hooks/use-solve";
 import { originGridAtom, targetGridAtom } from "./state/grids";
 import { solveMoveAtom } from "./state/solve-moves";
+import { generateRandomGrid } from "./utils/generate-random-grid/generate-random-grid";
 
 function App() {
   const [originGrid, setOriginGrid] = useAtom(originGridAtom);
@@ -13,6 +15,13 @@ function App() {
   const solveMoves = useAtomValue(solveMoveAtom);
 
   const solveGrid = useSolveGrid();
+
+  useEffect(() => {
+    window.generateGrid = () => {
+      const randomGrid = generateRandomGrid(2, 4);
+      console.log(randomGrid);
+    };
+  }, []);
 
   return (
     <main className="p-4 flex flex-col gap-4">
