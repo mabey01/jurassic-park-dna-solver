@@ -1,27 +1,19 @@
 import { useAtom, useAtomValue } from "jotai";
-import { useEffect } from "react";
 import { Grid } from "./components/grid";
 import { Move } from "./components/move";
 import { Moves } from "./components/moves";
+import { Solution } from "./components/solution";
 import { useSolveGrid } from "./hooks/use-solve";
 import { originGridAtom, targetGridAtom } from "./state/grids";
-import { solveMoveAtom } from "./state/solve-moves";
-import { generateRandomGrid } from "./utils/generate-random-grid/generate-random-grid";
+import { solutionStateAtom } from "./state/solution";
 
 function App() {
   const [originGrid, setOriginGrid] = useAtom(originGridAtom);
   const [targetGrid, setTargetGrid] = useAtom(targetGridAtom);
 
-  const solveMoves = useAtomValue(solveMoveAtom);
+  const solutionState = useAtomValue(solutionStateAtom);
 
   const solveGrid = useSolveGrid();
-
-  useEffect(() => {
-    window.generateGrid = () => {
-      const randomGrid = generateRandomGrid(2, 4);
-      console.log(randomGrid);
-    };
-  }, []);
 
   return (
     <main className="p-4 flex flex-col gap-4">
@@ -44,20 +36,19 @@ function App() {
       </div>
 
       <button
-        className="w-full rounded bg-blue-500 px-4 py-2 text-white font-medium"
+        disabled={solutionState.state === "solving"}
+        className="w-full rounded bg-blue-500 px-4 py-2 text-white font-medium disabled:bg-blue-300"
         onClick={solveGrid}
       >
         Solve
       </button>
 
-      {solveMoves.length > 0 && (
-        <ol>
-          {solveMoves.map((move, index) => (
-            <li key={index}>
-              <Move move={move} />
-            </li>
-          ))}
-        </ol>
+      {solutionState.state === "solving" && <div>Is Solving...</div>}
+
+      {solutionState.state === "solved" && (
+        <div>
+          <Solution solution={solutionState} />
+        </div>
       )}
     </main>
   );
