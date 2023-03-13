@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
 import { getManhattenDistance } from "./get-manhatten-distance";
 
-test("return a distance of 2 of only 2 adjacent entries are out of place", () => {
+test("return a distance of 1 of only 2 adjacent entries are out of place", () => {
   const grid = [
     [1, 2],
     [3, 4],
@@ -15,7 +15,7 @@ test("return a distance of 2 of only 2 adjacent entries are out of place", () =>
   const isValidTarget = (entry: number, targetEntry: number) =>
     entry === targetEntry;
 
-  expect(getManhattenDistance(grid, targetGrid, isValidTarget)).toBe(2);
+  expect(getManhattenDistance(grid, targetGrid, isValidTarget)).toBe(1);
 });
 
 test("return a distance of 4 if 2 entries are 2 tiles out of place", () => {

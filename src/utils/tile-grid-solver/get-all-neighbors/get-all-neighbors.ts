@@ -41,14 +41,28 @@ export function getAllNeighborObjects(
   enabledMoves: MoveType[]
 ): NeighborObject[] {
   const flatGrid = getFlatGrid(grid);
+  let allNeighborObjects: NeighborObject[] = [];
 
-  const neighborsMatrix = enabledMoves.map((enabledMove) => {
-    return flatGrid
-      .map((tile, flatGridIndex) => {
-        return getNeighborObject(grid, enabledMove, flatGridIndex);
-      })
-      .filter(Boolean) as NeighborObject[];
-  });
+  for (
+    let enabledMoveIndex = 0;
+    enabledMoveIndex < enabledMoves.length;
+    enabledMoveIndex++
+  ) {
+    for (
+      let flatGridIndex = 0;
+      flatGridIndex < flatGrid.length;
+      flatGridIndex++
+    ) {
+      const neighborObject = getNeighborObject(
+        grid,
+        enabledMoves[enabledMoveIndex],
+        flatGridIndex
+      );
+      if (neighborObject) {
+        allNeighborObjects.push(neighborObject);
+      }
+    }
+  }
 
-  return neighborsMatrix.flat();
+  return allNeighborObjects;
 }

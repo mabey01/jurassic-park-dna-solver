@@ -3,6 +3,7 @@ import {
   DndContext,
   DragEndEvent,
   PointerSensor,
+  TouchSensor,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
@@ -58,7 +59,7 @@ export function Grid({ grid, onUpdateGrid }: GridProps) {
           className="grid gap-2 relative"
           style={{
             gridTemplateColumns: `repeat(${gridColumns}, minmax(0, 1fr))`,
-            gridAutoRows: "50px",
+            gridAutoRows: "100px",
           }}
         >
           {gridItems.map((tile, index) => (

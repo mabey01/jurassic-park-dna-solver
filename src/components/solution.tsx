@@ -10,7 +10,7 @@ export function Solution({ solution }: SolutionProps) {
     <div>
       <ul className="list-none m-0">
         <li>
-          Solution Duration:{" "}
+          Duration:{" "}
           <span className="font-medium">{solution.meta.duration}ms</span>
         </li>
         <li>

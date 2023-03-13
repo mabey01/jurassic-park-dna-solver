@@ -8,6 +8,14 @@ function bySmallestG(a: Node, b: Node) {
   return a.f - b.f;
 }
 
+function isAlreadyInList(list: Node[], node: Node) {
+  return list.some((listNode) => node.isEqual(listNode));
+}
+
+function getEqualListEntry(list: Node[], node: Node) {
+  return list.find((listNode) => node.isEqual(listNode));
+}
+
 export function getShortestSolveMoves(
   originGrid: TileGrid,
   targetGrid: TileGrid,
@@ -29,17 +37,14 @@ export function getShortestSolveMoves(
     }
 
     const neighborObjects = getAllNeighborObjects(currentNode.grid, moves);
-    for (const neighborObject of neighborObjects) {
+
+    for (let i = 0; i < neighborObjects.length; i++) {
       const neighborNode = currentNode.createNewNode(
-        neighborObject.grid,
-        neighborObject.move
+        neighborObjects[i].grid,
+        neighborObjects[i].move
       );
 
-      if (
-        closedList.some((closedListNode) =>
-          closedListNode.isEqual(neighborNode)
-        )
-      ) {
+      if (isAlreadyInList(closedList, neighborNode)) {
         continue;
       }
 
@@ -47,9 +52,7 @@ export function getShortestSolveMoves(
       neighborNode.h = getManhattenDistance(neighborNode.grid, targetGrid);
       neighborNode.f = neighborNode.g + neighborNode.h;
 
-      const sameOpenListNode = openList.find((openListNode) =>
-        openListNode.isEqual(neighborNode)
-      );
+      const sameOpenListNode = getEqualListEntry(openList, neighborNode);
 
       if (sameOpenListNode) {
         if (neighborNode.g > sameOpenListNode.g) {

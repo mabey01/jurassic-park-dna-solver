@@ -1,6 +1,6 @@
 import { TileGrid } from "../types";
 
-export const GRID_2X4_ORIGIN: TileGrid = [
+export const GRID_4X2_ORIGIN: TileGrid = [
   [
     {
       id: "e40ccacf-116b-470a-82d6-1eabd448ab26",

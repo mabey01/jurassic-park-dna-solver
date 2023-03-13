@@ -17,7 +17,7 @@ export class Node {
 
     this.serialized = getFlatGrid(grid)
       .map((tile) => tile.type)
-      .join("-");
+      .join("");
   }
 
   createNewNode(grid: TileGrid, move: Move) {

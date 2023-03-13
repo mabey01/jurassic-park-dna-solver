@@ -9,6 +9,10 @@ type SolvingSolutionState = {
   state: "solving";
 };
 
+type GridsAreEqualSolutionState = {
+  state: "grids-are-equal";
+};
+
 export type SolvedSolutionState = {
   state: "solved";
   meta: {
@@ -19,6 +23,7 @@ export type SolvedSolutionState = {
 
 type SolutionState =
   | IdleSolutionState
+  | GridsAreEqualSolutionState
   | SolvingSolutionState
   | SolvedSolutionState;
 
