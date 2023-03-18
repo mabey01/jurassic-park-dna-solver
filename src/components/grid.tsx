@@ -2,6 +2,7 @@ import {
   closestCenter,
   DndContext,
   DragEndEvent,
+  MouseSensor,
   PointerSensor,
   TouchSensor,
   useSensor,
@@ -30,7 +31,7 @@ export function Grid({ grid, onUpdateGrid }: GridProps) {
     selectedGridEntryPositionAtom
   );
 
-  const sensors = useSensors(useSensor(PointerSensor));
+  const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
 
   const handleDragEnd = ({ active, over }: DragEndEvent) => {
     if (active.id !== over?.id) {
