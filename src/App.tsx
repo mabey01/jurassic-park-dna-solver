@@ -10,7 +10,7 @@ import { solutionStateAtom } from "./state/solution";
 function PageLayout({ children, className, ...props }: ComponentProps<"div">) {
   return (
     <div {...props} className={`h-full ${className}`}>
-      <div className="p-2 sm:p-4 flex gap-4 flex-col h-full max-w-4xl mx-auto">
+      <div className="p-2 sm:p-4 flex gap-4 flex-col h-full max-w-2xl mx-auto">
         {children}
       </div>
     </div>
@@ -103,10 +103,10 @@ export function ResultPage() {
     );
   }
 
-  if (resultsState.state === "solving") {
+  if (true) {
     return (
-      <div className="w-full h-full bg-blue-500 text-neutral-50 grid place-items-center">
-        <div>Calculating best path...</div>
+      <div className="w-full h-full bg-blue-500 text-neutral-50 flex justify-center">
+        <div className="mt-32">Calculating best path...</div>
       </div>
     );
   }
