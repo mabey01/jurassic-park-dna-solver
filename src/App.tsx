@@ -103,7 +103,7 @@ export function ResultPage() {
     );
   }
 
-  if (true) {
+  if (resultsState.state === "solving") {
     return (
       <div className="w-full h-full bg-blue-500 text-neutral-50 flex justify-center">
         <div className="mt-32">Calculating best path...</div>
