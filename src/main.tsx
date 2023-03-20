@@ -1,11 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { OriginGridPage, ResultPage, TargetGridPage } from "./App";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createHashRouter,
+  createMemoryRouter,
+  RouterProvider,
+} from "react-router-dom";
 
 import "./index.css";
 
-const router = createBrowserRouter([
+const router = createMemoryRouter([
   {
     path: "/",
     element: <OriginGridPage />,
