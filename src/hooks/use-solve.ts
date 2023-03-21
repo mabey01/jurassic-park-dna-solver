@@ -5,7 +5,7 @@ import { originGridAtom, targetGridAtom } from "../state/grids";
 import { solutionStateAtom } from "../state/solution";
 import { isEqual } from "../utils/tile-grid/is-equal/is-equal";
 
-const MINIMUM_RUNTIME = 1_000;
+const MINIMUM_RUNTIME_MS = 500;
 
 export function useSolveGrid() {
   const [solutionState, setSolutionState] = useAtom(solutionStateAtom);
@@ -66,7 +66,9 @@ export function useSolveGrid() {
     }
 
     const timeoutTime =
-      duration_in_ms < MINIMUM_RUNTIME ? MINIMUM_RUNTIME - duration_in_ms : 0;
+      duration_in_ms < MINIMUM_RUNTIME_MS
+        ? MINIMUM_RUNTIME_MS - duration_in_ms
+        : 0;
     setTimeout(() => {
       setSolutionState({
         state: "solved",
