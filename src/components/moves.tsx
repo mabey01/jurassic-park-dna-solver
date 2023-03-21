@@ -1,6 +1,7 @@
 import { useAtom, useAtomValue } from "jotai";
 import { availableMovesAtom, enabledMovesAtom } from "../state/moves";
 import { MoveType } from "../utils/apply-move-to-grid/moves";
+import { assertMoveTypeNever } from "../utils/assert-move-type-never";
 
 function getMoveLabel(moveType: MoveType) {
   if (moveType === "HORIZONTAL_SWITCH") {
@@ -18,6 +19,12 @@ function getMoveLabel(moveType: MoveType) {
   if (moveType === "RIGHT_TO_LEFT_DIAGONAL") {
     return "Diagonal (rtl)";
   }
+
+  if (moveType === "VERTICAL_SKIP") {
+    return "Dr. Wu special";
+  }
+
+  assertMoveTypeNever(moveType);
 }
 
 export function Moves() {

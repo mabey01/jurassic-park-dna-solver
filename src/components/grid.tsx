@@ -2,8 +2,8 @@ import {
   closestCenter,
   DndContext,
   DragEndEvent,
+  KeyboardSensor,
   MouseSensor,
-  PointerSensor,
   TouchSensor,
   useSensor,
   useSensors,
@@ -11,6 +11,7 @@ import {
 import {
   rectSortingStrategy,
   SortableContext,
+  sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useAtom } from "jotai";
@@ -31,7 +32,15 @@ export function Grid({ grid, onUpdateGrid }: GridProps) {
     selectedGridEntryPositionAtom
   );
 
-  const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
+  const sensors = useSensors(
+    useSensor(MouseSensor),
+    useSensor(TouchSensor),
+    useSensor(KeyboardSensor, {
+      // Disable smooth scrolling in Cypress automated tests
+      scrollBehavior: undefined,
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   const handleDragEnd = ({ active, over }: DragEndEvent) => {
     if (active.id !== over?.id) {
@@ -57,7 +66,7 @@ export function Grid({ grid, onUpdateGrid }: GridProps) {
     >
       <SortableContext items={gridItems} strategy={rectSortingStrategy}>
         <div
-          className="grid gap-2 relative"
+          className="relative grid gap-2"
           style={{
             gridTemplateColumns: `repeat(${gridColumns}, minmax(0, 1fr))`,
             gridAutoRows: "100px",

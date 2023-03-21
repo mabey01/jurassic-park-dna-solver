@@ -1,11 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { OriginGridPage, ResultPage, TargetGridPage } from "./App";
-import {
-  createHashRouter,
-  createMemoryRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createMemoryRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
 
