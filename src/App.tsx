@@ -113,7 +113,7 @@ export function TargetGridPage() {
             onClick={calculateResults}
             className="bg-neutral-700 text-neutral-50 hover:bg-neutral-600"
           >
-            Calculate path
+            Calculate Path
           </LinkButton>
         </div>
       </div>
