@@ -25,13 +25,13 @@ import { Tile } from "./tile";
 const container: Variants = {
   show: {
     transition: {
-      staggerChildren: 0.05,
+      staggerChildren: 0.1,
     },
   },
 };
 
 const item: Variants = {
-  hidden: { y: 30, opacity: 0 },
+  hidden: { y: 20, opacity: 0 },
   show: { y: 0, opacity: 1 },
 };
 
@@ -92,7 +92,7 @@ export function Grid({ grid, onUpdateGrid }: GridProps) {
             <motion.div
               key={tile.id}
               variants={item}
-              transition={{ type: "spring", stiffness: 1200, damping: 34 }}
+              transition={{ type: "spring", stiffness: 800, damping: 30 }}
             >
               <SortableItem id={tile.id}>
                 <Tile
