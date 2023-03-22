@@ -12,8 +12,8 @@ import {
   rectSortingStrategy,
   SortableContext,
   sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { motion, Variants } from "framer-motion";
 import { useAtom } from "jotai";
 import { selectedGridEntryPositionAtom } from "../state/selected-grid-entry";
 import { TileGrid, GridPosition } from "../types";
@@ -21,6 +21,19 @@ import { isSamePosition } from "../utils/tile-grid/is-same-position";
 import { moveTileById } from "../utils/tile-grid/move-tile/move-tile-by-id";
 import { SortableItem } from "./sortable-item";
 import { Tile } from "./tile";
+
+const container: Variants = {
+  show: {
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+};
+
+const item: Variants = {
+  hidden: { y: 30, opacity: 0 },
+  show: { y: 0, opacity: 1 },
+};
 
 interface GridProps {
   onUpdateGrid: (newGrid: TileGrid) => void;
@@ -65,26 +78,37 @@ export function Grid({ grid, onUpdateGrid }: GridProps) {
       onDragEnd={handleDragEnd}
     >
       <SortableContext items={gridItems} strategy={rectSortingStrategy}>
-        <div
+        <motion.div
           className="relative grid gap-2"
           style={{
             gridTemplateColumns: `repeat(${gridColumns}, minmax(0, 1fr))`,
             gridAutoRows: "100px",
           }}
+          variants={container}
+          initial="hidden"
+          animate="show"
         >
           {gridItems.map((tile, index) => (
-            <SortableItem key={tile.id} id={tile.id}>
-              <Tile
-                type={tile.type}
-                isSelected={isSamePosition(
-                  getGridEntryPosition(index),
-                  selectedGridItem
-                )}
-                onClick={() => setSelectedGridItem(getGridEntryPosition(index))}
-              />
-            </SortableItem>
+            <motion.div
+              key={tile.id}
+              variants={item}
+              transition={{ type: "spring", stiffness: 1200, damping: 34 }}
+            >
+              <SortableItem id={tile.id}>
+                <Tile
+                  type={tile.type}
+                  isSelected={isSamePosition(
+                    getGridEntryPosition(index),
+                    selectedGridItem
+                  )}
+                  onClick={() =>
+                    setSelectedGridItem(getGridEntryPosition(index))
+                  }
+                />
+              </SortableItem>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </SortableContext>
     </DndContext>
   );

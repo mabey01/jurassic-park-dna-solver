@@ -1,5 +1,19 @@
+import { motion, Variants } from "framer-motion";
 import { SolvedSolutionState } from "../state/solution";
 import { Move } from "./move";
+
+const container: Variants = {
+  show: {
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+};
+
+const item: Variants = {
+  hidden: { y: 20, opacity: 0 },
+  show: { y: 0, opacity: 1 },
+};
 
 interface SolutionProps {
   solution: SolvedSolutionState;
@@ -8,7 +22,7 @@ interface SolutionProps {
 export function Solution({ solution }: SolutionProps) {
   return (
     <div>
-      <ul className="list-none m-0">
+      <ul className="m-0 list-none">
         <li>
           Duration:{" "}
           <span className="font-medium">{solution.meta.duration}ms</span>
@@ -18,13 +32,22 @@ export function Solution({ solution }: SolutionProps) {
           <span className="font-medium">{solution.solvingPath.length}</span>
         </li>
       </ul>
-      <ol className="mt-2">
+      <motion.ol
+        className="mt-2"
+        variants={container}
+        initial="hidden"
+        animate="show"
+      >
         {solution.solvingPath.map((move, index) => (
-          <li key={index}>
+          <motion.li
+            key={index}
+            variants={item}
+            transition={{ type: "spring", stiffness: 1200, damping: 34 }}
+          >
             <Move move={move} />
-          </li>
+          </motion.li>
         ))}
-      </ol>
+      </motion.ol>
     </div>
   );
 }
