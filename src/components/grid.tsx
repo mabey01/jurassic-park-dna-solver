@@ -79,7 +79,7 @@ export function Grid({ grid, onUpdateGrid }: GridProps) {
     >
       <SortableContext items={gridItems} strategy={rectSortingStrategy}>
         <motion.div
-          className="relative grid gap-2"
+          className="grid gap-2"
           style={{
             gridTemplateColumns: `repeat(${gridColumns}, minmax(0, 1fr))`,
             gridAutoRows: "100px",
@@ -89,12 +89,12 @@ export function Grid({ grid, onUpdateGrid }: GridProps) {
           animate="show"
         >
           {gridItems.map((tile, index) => (
-            <motion.div
-              key={tile.id}
-              variants={item}
-              transition={{ type: "spring", stiffness: 800, damping: 30 }}
-            >
-              <SortableItem id={tile.id}>
+            <SortableItem key={tile.id} id={tile.id}>
+              <motion.div
+                className="h-full w-full"
+                variants={item}
+                transition={{ type: "spring", stiffness: 800, damping: 30 }}
+              >
                 <Tile
                   type={tile.type}
                   isSelected={isSamePosition(
@@ -105,8 +105,8 @@ export function Grid({ grid, onUpdateGrid }: GridProps) {
                     setSelectedGridItem(getGridEntryPosition(index))
                   }
                 />
-              </SortableItem>
-            </motion.div>
+              </motion.div>
+            </SortableItem>
           ))}
         </motion.div>
       </SortableContext>

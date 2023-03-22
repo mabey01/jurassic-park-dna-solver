@@ -37,7 +37,7 @@ export function SortableItem({ id, children, ...props }: SortableItemProps) {
       {...props}
       ref={setNodeRef}
       style={style}
-      className="h-full w-full rounded-md outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+      className="rounded-md outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
       {...attributes}
       {...listeners}
     >
