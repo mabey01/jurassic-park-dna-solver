@@ -8,10 +8,6 @@ function bySmallestF(a: Node, b: Node) {
   return a.f - b.f;
 }
 
-function getEqualListEntry(list: Node[], entry: Node) {
-  return list.find((listEntry) => entry.isEqual(listEntry));
-}
-
 export function getGridSolvingPath(
   originGrid: TileGrid,
   targetGrid: TileGrid,

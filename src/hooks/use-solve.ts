@@ -15,9 +15,9 @@ export function useSolveGrid() {
 
   const solverWorkerInstance = useMemo(
     () =>
-      new ComlinkWorker<typeof import("../worker/grid-solver-worker")>(
-        new URL("../worker/grid-solver-worker", import.meta.url)
-      ),
+      new ComlinkWorker<
+        typeof import("../worker/grid-solver-worker-with-open-list-array")
+      >(new URL("../worker/index", import.meta.url)),
     []
   );
 
