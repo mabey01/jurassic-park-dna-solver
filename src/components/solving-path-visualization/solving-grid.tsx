@@ -5,8 +5,8 @@ import { Tile } from "../tile";
 
 const transitionConfig: Transition = {
   type: "spring",
-  damping: 25,
-  stiffness: 120,
+  damping: 16,
+  stiffness: 100,
 };
 
 interface SolvingGridProps {

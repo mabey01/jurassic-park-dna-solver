@@ -13,11 +13,11 @@ export function SolvingGridPlayControls() {
   } = useSolvingPlayControls();
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center">
       <button
         onClick={goToPreviousMoveIndex}
         disabled={!canGoToPreviousMoveIndex}
-        className="rounded focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400 disabled:opacity-60"
+        className="rounded p-1 hover:bg-white/20 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-blue-400 disabled:opacity-60"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +31,7 @@ export function SolvingGridPlayControls() {
 
       <button
         onClick={canReplay ? replay : togglePlay}
-        className="rounded focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+        className="rounded p-1 hover:bg-white/20 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-blue-400"
       >
         {!canReplay && !isPlaying && (
           <svg
@@ -82,7 +82,7 @@ export function SolvingGridPlayControls() {
       <button
         onClick={goToNextMoveIndex}
         disabled={!canGoToNextMoveIndex}
-        className="rounded focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400 disabled:opacity-60"
+        className="rounded p-1 hover:bg-white/20 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-blue-400 disabled:opacity-60"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

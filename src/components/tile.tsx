@@ -19,7 +19,7 @@ export const Tile = forwardRef<HTMLDivElement, TileProps>(
       <div
         ref={forwardedRef}
         {...props}
-        className="flex h-full w-full cursor-pointer items-center justify-center rounded-md text-2xl font-bold text-white"
+        className="flex h-full w-full items-center justify-center rounded-md text-2xl font-bold text-white"
         style={{
           backgroundColor: getTileBackgroundColor(type),
           border: isSelected ? "4px black solid" : "none",
