@@ -20,7 +20,11 @@ import {
   unserializeGrid,
 } from "./utils/tile-grid/serialize-grid/serialize-grid";
 
-function PageLayout({ children, className, ...props }: ComponentProps<"div">) {
+export function PageLayout({
+  children,
+  className,
+  ...props
+}: ComponentProps<"div">) {
   return (
     <div {...props} className={`h-full ${className} overflow-scroll`}>
       <div className="mx-auto flex h-full max-w-2xl flex-col gap-4 p-2 sm:p-4">
@@ -30,7 +34,11 @@ function PageLayout({ children, className, ...props }: ComponentProps<"div">) {
   );
 }
 
-function PageHeadline({ children, className, ...props }: ComponentProps<"h1">) {
+export function PageHeadline({
+  children,
+  className,
+  ...props
+}: ComponentProps<"h1">) {
   return (
     <h1 {...props} className={`text-2xl font-semibold ${className}`}>
       {children}
@@ -38,7 +46,7 @@ function PageHeadline({ children, className, ...props }: ComponentProps<"h1">) {
   );
 }
 
-function LinkButton({ className, children, ...props }: LinkProps) {
+export function LinkButton({ className, children, ...props }: LinkProps) {
   return (
     <Link
       {...props}

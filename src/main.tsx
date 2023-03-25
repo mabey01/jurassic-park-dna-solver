@@ -4,19 +4,23 @@ import { OriginGridPage, ResultPage, TargetGridPage } from "./App";
 import { createHashRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
+import { ErrorPage } from "./components/error-page/error-page";
 
 const router = createHashRouter([
   {
     path: "/",
     element: <OriginGridPage />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/:serializedOriginGrid",
     element: <TargetGridPage />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/results/:serializedOriginGrid/:serializedTargetGrid",
     element: <ResultPage />,
+    errorElement: <ErrorPage />,
   },
 ]);
 
