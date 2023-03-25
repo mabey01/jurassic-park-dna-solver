@@ -1,13 +1,15 @@
 export type GridPosition = [number, number];
-export type GridDimensions = {
+export interface GridDimensions {
   numberOfRows: number;
   numberOfColumns: number;
-};
+}
 
-export type TileType = "g" | "a" | "t" | "c";
+export const TILE_TYPES = ["g", "a", "t", "c"] as const;
 
-export type Tile = {
+export type TileType = (typeof TILE_TYPES)[number];
+
+export interface Tile {
   id: string;
   type: TileType;
-};
+}
 export type TileGrid = Tile[][];

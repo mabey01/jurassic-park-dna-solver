@@ -1,4 +1,4 @@
-import { Move as MoveType } from "../utils/apply-move-to-grid/moves";
+import { type Move as MoveType } from "../utils/apply-move-to-grid/moves";
 import { assertMoveTypeNever } from "../utils/assert-move-type-never";
 
 interface MoveProps {

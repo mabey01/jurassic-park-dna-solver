@@ -1,13 +1,13 @@
-import { TileGrid } from "../../../types";
+import { type TileGrid } from "../../../types";
 import { applyMoveToGrid } from "../../apply-move-to-grid/apply-move-to-grid";
-import { Move, MoveType } from "../../apply-move-to-grid/moves";
+import { type Move, type MoveType } from "../../apply-move-to-grid/moves";
 import { getFlatGrid } from "../../grid/get-flat-grid/get-flat-grid";
 import { getGridPositionByFlatIndex } from "../../grid/get-grid-position-by-flat-index/get-grid-position-by-flat-index";
 
-type NeighborObject = {
+interface NeighborObject {
   grid: TileGrid;
   move: Move;
-};
+}
 
 function getNeighborObject(
   grid: TileGrid,
@@ -16,7 +16,7 @@ function getNeighborObject(
 ): NeighborObject | undefined {
   const tilePosition = getGridPositionByFlatIndex(grid, flatGridIndex);
 
-  if (!tilePosition) {
+  if (tilePosition == null) {
     return undefined;
   }
 
@@ -41,7 +41,7 @@ export function getAllNeighborObjects(
   enabledMoves: MoveType[]
 ): NeighborObject[] {
   const flatGrid = getFlatGrid(grid);
-  let allNeighborObjects: NeighborObject[] = [];
+  const allNeighborObjects: NeighborObject[] = [];
 
   for (
     let enabledMoveIndex = 0;
@@ -55,10 +55,10 @@ export function getAllNeighborObjects(
     ) {
       const neighborObject = getNeighborObject(
         grid,
-        enabledMoves[enabledMoveIndex],
+        enabledMoves[enabledMoveIndex]!,
         flatGridIndex
       );
-      if (neighborObject) {
+      if (neighborObject != null) {
         allNeighborObjects.push(neighborObject);
       }
     }

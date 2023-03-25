@@ -1,4 +1,4 @@
-import { TileGrid } from "../types";
+import { type TileGrid } from "../types";
 
 export const GRID_4X2_ORIGIN: TileGrid = [
   [

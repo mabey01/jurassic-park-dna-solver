@@ -1,4 +1,4 @@
-import { GridPosition } from "../../types";
+import { type GridPosition } from "../../types";
 
 export function isSamePosition(a?: GridPosition, b?: GridPosition) {
   if (a === undefined || b === undefined) return false;

@@ -8,7 +8,7 @@ test("should return an empty grid if rows and columns are length 0", () => {
 test("should return a grid with correct dimensions", () => {
   const randomGrid = generateRandomGrid(1, 2);
   expect(randomGrid.length).toBe(1);
-  expect(randomGrid[0].length).toBe(2);
+  expect(randomGrid[0]!.length).toBe(2);
 });
 
 test("should return a grid with equal amount of unique tile values", () => {

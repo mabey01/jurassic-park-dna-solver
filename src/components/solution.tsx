@@ -1,5 +1,5 @@
-import { motion, Variants } from "framer-motion";
-import { SolvedSolutionState } from "../state/solution";
+import { motion, type Variants } from "framer-motion";
+import { type SolvedSolutionState } from "../hooks/use-solve";
 import { Move } from "./move";
 
 const container: Variants = {

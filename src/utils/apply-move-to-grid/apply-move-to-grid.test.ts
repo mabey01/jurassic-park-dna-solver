@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { TileGrid } from "../../types";
+import { type TileGrid } from "../../types";
 import { applyMoveToGrid } from "./apply-move-to-grid";
 
 describe("HORIZONTAL moves", () => {

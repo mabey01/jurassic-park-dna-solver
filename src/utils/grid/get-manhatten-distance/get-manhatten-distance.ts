@@ -1,4 +1,4 @@
-import { GridPosition, TileGrid } from "../../../types";
+import { type GridPosition } from "../../../types";
 import { getDistanceByPositions } from "../../grid/get-distance-between/get-distance-by-position";
 import { getFlatGrid } from "../../grid/get-flat-grid/get-flat-grid";
 import { getGridPositionByFlatIndex } from "../../grid/get-grid-position-by-flat-index/get-grid-position-by-flat-index";
@@ -17,9 +17,9 @@ export function getManhattenDistance<T>(
       .map((targetTile, index) =>
         isEntryValidTarget(tile, targetTile) ? index : NaN
       )
-      .filter(isFinite) as number[];
+      .filter(isFinite);
 
-    if (!validTargetIndices.length) return NaN;
+    if (validTargetIndices.length === 0) return NaN;
 
     const validTargetPositions = validTargetIndices.map((targetFlatGridIndex) =>
       getGridPositionByFlatIndex(targetGrid, targetFlatGridIndex)

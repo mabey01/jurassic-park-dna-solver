@@ -1,12 +1,11 @@
-import { motion, Transition } from "framer-motion";
 import { useSetAtom } from "jotai";
-import { useEffect, useMemo } from "react";
-import { TileGrid } from "../../types";
-import { Move } from "../../utils/apply-move-to-grid/moves";
+import { useEffect } from "react";
+import { type TileGrid } from "../../types";
+import { type Move } from "../../utils/apply-move-to-grid/moves";
 import { SolvingGrid } from "./solving-grid";
 import { SolvingGridPlayControls } from "./solving-grid-play-controls";
 import { SolvingGridProgressBar } from "./solving-grid-progress-bar";
-import { maxMoveIndexAtom } from "./state";
+import { currentMoveIndexAtom, maxMoveIndexAtom } from "./state";
 import { useCurrentGrid } from "./use-current-grid";
 
 interface SolvingPathVisualizationProps {
@@ -20,9 +19,17 @@ export function SolvingPathVisualization({
 }: SolvingPathVisualizationProps) {
   const currentGrid = useCurrentGrid(sourceGrid, solvingPath, 1_000);
   const setMaxMoveIndex = useSetAtom(maxMoveIndexAtom);
+  const setCurrentMoveIndex = useSetAtom(currentMoveIndexAtom);
 
   useEffect(() => {
+    // If solving path is empty we render error page, therefore it can not be empty here
+    if (solvingPath.length === 0) return;
+
     setMaxMoveIndex(solvingPath.length - 1);
+
+    return () => {
+      setCurrentMoveIndex(-1);
+    };
   }, [solvingPath]);
 
   return (

@@ -1,14 +1,24 @@
 import * as Checkbox from "@radix-ui/react-checkbox";
-import { useAtom, useAtomValue } from "jotai";
-import { ComponentProps } from "react";
-import { Link, LinkProps, Navigate } from "react-router-dom";
+import { type ComponentProps, useMemo } from "react";
+import {
+  Link,
+  type LinkProps,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
+import invariant from "tiny-invariant";
 import { Grid } from "./components/grid";
 import { Solution } from "./components/solution";
 import { SolvingPathVisualization } from "./components/solving-path-visualization/solving-path-visualization";
 import { useEnableVerticalSkipMove } from "./hooks/use-enable-vertical-skip-move";
 import { useSolveGrid } from "./hooks/use-solve";
-import { originGridAtom, targetGridAtom } from "./state/grids";
-import { solutionStateAtom } from "./state/solution";
+import { useSyncUrlState } from "./hooks/use-sync-url-state";
+import { generateDefaultGrid } from "./utils/generate-random-grid/generate-default-grid";
+import { getEnabledMoveTypes } from "./utils/get-enabled-move-types/get-enabled-move-types";
+import {
+  serializeGrid,
+  unserializeGrid,
+} from "./utils/tile-grid/serialize-grid/serialize-grid";
 
 function PageLayout({ children, className, ...props }: ComponentProps<"div">) {
   return (
@@ -40,7 +50,12 @@ function LinkButton({ className, children, ...props }: LinkProps) {
 }
 
 export function OriginGridPage() {
-  const [originGrid, setOriginGrid] = useAtom(originGridAtom);
+  const [originGrid, setOriginGrid] = useSyncUrlState(
+    "origin-grid",
+    generateDefaultGrid(),
+    serializeGrid,
+    unserializeGrid
+  );
 
   return (
     <PageLayout className="bg-neutral-900 text-neutral-50">
@@ -52,7 +67,7 @@ export function OriginGridPage() {
       </div>
       <div className="flex justify-end">
         <LinkButton
-          to="/target-grid"
+          to={`/${serializeGrid(originGrid)}`}
           className="bg-neutral-700 text-neutral-50 hover:bg-neutral-600"
         >
           Continue
@@ -63,8 +78,16 @@ export function OriginGridPage() {
 }
 
 export function TargetGridPage() {
-  const calculateResults = useSolveGrid();
-  const [targetGrid, setTargetGrid] = useAtom(targetGridAtom);
+  const { serializedOriginGrid } = useParams();
+  invariant(serializedOriginGrid, "Missing origin grid");
+
+  const [targetGrid, setTargetGrid] = useSyncUrlState(
+    "target-grid",
+    unserializeGrid(serializedOriginGrid),
+    serializeGrid,
+    unserializeGrid
+  );
+
   const {
     isVerticalSkipMoveEnabled,
     enableVerticalSkipMove,
@@ -83,9 +106,9 @@ export function TargetGridPage() {
         <div className="flex items-center gap-2 sm:justify-end">
           <Checkbox.Root
             checked={isVerticalSkipMoveEnabled}
-            onCheckedChange={(isChecked) =>
-              isChecked ? enableVerticalSkipMove() : disableVerticalSkipMove()
-            }
+            onCheckedChange={(isChecked) => {
+              isChecked ? enableVerticalSkipMove() : disableVerticalSkipMove();
+            }}
             id="enable-vertical-skip-move"
             className="flex h-6 w-6 appearance-none items-center justify-center rounded-md bg-white outline-none hover:bg-neutral-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
           >
@@ -110,8 +133,9 @@ export function TargetGridPage() {
         </div>
         <div className="flex justify-end">
           <LinkButton
-            to="/results"
-            onClick={calculateResults}
+            to={`/results/${serializedOriginGrid}/${serializeGrid(
+              targetGrid
+            )}?include-dr-wu-move=${isVerticalSkipMoveEnabled}`}
             className="bg-neutral-700 text-neutral-50 hover:bg-neutral-600"
           >
             Calculate Path
@@ -123,11 +147,30 @@ export function TargetGridPage() {
 }
 
 export function ResultPage() {
-  const originGrid = useAtomValue(originGridAtom);
-  const resultsState = useAtomValue(solutionStateAtom);
+  const { serializedOriginGrid, serializedTargetGrid } = useParams();
+  invariant(serializedOriginGrid, "Missing origin grid");
+  invariant(serializedTargetGrid, "Missing target grid");
+
+  const [searchParams] = useSearchParams();
+
+  const originGrid = useMemo(
+    () => unserializeGrid(serializedOriginGrid),
+    [serializedOriginGrid]
+  );
+
+  const targetGrid = useMemo(
+    () => unserializeGrid(serializedTargetGrid),
+    [serializedTargetGrid]
+  );
+
+  const resultsState = useSolveGrid(
+    originGrid,
+    targetGrid,
+    getEnabledMoveTypes(searchParams.get("include-dr-wu-move") === "true")
+  );
 
   if (resultsState.state === "idle") {
-    return <Navigate to="/" />;
+    return null;
   }
 
   if (resultsState.state === "grids-are-equal") {

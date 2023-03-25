@@ -1,5 +1,5 @@
-import { ComponentProps, forwardRef } from "react";
-import { TileType } from "../types";
+import { type ComponentProps, forwardRef } from "react";
+import { type TileType } from "../types";
 
 function getTileBackgroundColor(tileType: TileType) {
   if (tileType === "a") return "#93869a";
@@ -10,11 +10,10 @@ function getTileBackgroundColor(tileType: TileType) {
 
 interface TileProps extends ComponentProps<"div"> {
   type: TileType;
-  isSelected?: boolean;
 }
 
 export const Tile = forwardRef<HTMLDivElement, TileProps>(
-  ({ type, isSelected, ...props }, forwardedRef) => {
+  ({ type, ...props }, forwardedRef) => {
     return (
       <div
         ref={forwardedRef}
@@ -22,7 +21,6 @@ export const Tile = forwardRef<HTMLDivElement, TileProps>(
         className="flex h-full w-full items-center justify-center rounded-md text-2xl font-bold text-white"
         style={{
           backgroundColor: getTileBackgroundColor(type),
-          border: isSelected ? "4px black solid" : "none",
         }}
       >
         {type.toUpperCase()}
@@ -30,3 +28,5 @@ export const Tile = forwardRef<HTMLDivElement, TileProps>(
     );
   }
 );
+
+Tile.displayName = "Tile";

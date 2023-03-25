@@ -1,8 +1,7 @@
-import { TileGrid } from "../../../types";
+import { type TileGrid } from "../../../types";
 import { getIndexById } from "../../arrays/get-array-by-index/get-index-by-id";
 import { insertEntry } from "../../arrays/insert-entry/insert-entry";
 import { removeEntry } from "../../arrays/remove-entry/remove-entry";
-import { replaceEntry } from "../../arrays/replace-entry/replace-entry";
 import { applyGridTransformation } from "../../grid/apply-array-transformation/apply-grid-transformation";
 
 export function moveTileById(
@@ -12,7 +11,7 @@ export function moveTileById(
 ) {
   return applyGridTransformation(grid, (flatGird) => {
     const originTileFlatGridIndex = getIndexById(flatGird, originTileId);
-    const originTile = flatGird[originTileFlatGridIndex];
+    const originTile = flatGird[originTileFlatGridIndex]!;
 
     const targetTileFlatGridIndex = getIndexById(flatGird, targetTileId);
 

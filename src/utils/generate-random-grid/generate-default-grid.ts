@@ -1,26 +1,32 @@
-import { Tile, TileGrid, TileType } from "../../types";
+import { type Tile, type TileGrid, type TileType } from "../../types";
 import { getTileValues } from "../get-tile-values/get-tile-values";
 import { popRandomEntry } from "../arrays/pop-random-entry/pop-random-entry";
 
-function uid() {
-  return crypto.randomUUID();
+function* getId(): Generator<string, string, unknown> {
+  let i = 0;
+  while (true) {
+    yield String(i++);
+  }
 }
+
+const idGenerator = getId();
+const getNextId = () => idGenerator.next().value;
 
 const DEFAULT_GRID_POSITIONS: Tile[][] = [
   [
-    { type: "g", id: uid() },
-    { type: "a", id: uid() },
+    { type: "g", id: getNextId() },
+    { type: "a", id: getNextId() },
   ],
   [],
   [],
   [
     {
       type: "t",
-      id: uid(),
+      id: getNextId(),
     },
     {
       type: "c",
-      id: uid(),
+      id: getNextId(),
     },
   ],
 ];
@@ -39,12 +45,12 @@ export function generateDefaultGrid(
   return rows.map((_, rowIndex) => {
     const columns = new Array(numberOfColumns).fill(0);
     return columns.map((_, columnIndex) => {
-      if (DEFAULT_GRID_POSITIONS[rowIndex][columnIndex]) {
-        return DEFAULT_GRID_POSITIONS[rowIndex][columnIndex];
+      if (DEFAULT_GRID_POSITIONS[rowIndex]?.[columnIndex]) {
+        return DEFAULT_GRID_POSITIONS[rowIndex]![columnIndex]!;
       }
 
       return {
-        id: crypto.randomUUID(),
+        id: getNextId(),
         type: popRandomEntry(tileValues),
       };
     });

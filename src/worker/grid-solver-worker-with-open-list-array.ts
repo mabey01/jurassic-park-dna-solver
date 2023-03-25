@@ -1,10 +1,10 @@
-import { TileGrid } from "../types";
-import { Move, MoveType } from "../utils/apply-move-to-grid/moves";
+import { type TileGrid } from "../types";
+import { type Move, type MoveType } from "../utils/apply-move-to-grid/moves";
 import { getAllNeighborObjects } from "../utils/tile-grid-solver/get-all-neighbors/get-all-neighbors";
-import { Node } from "../utils/tile-grid-solver/node";
+import { TileGridNode } from "../utils/tile-grid-solver/tile-grid-node";
 import { getManhattenDistance } from "../utils/tile-grid/get-manhatten-distance/get-manhatten-distance";
 
-function bySmallestF(a: Node, b: Node) {
+function bySmallestF(a: TileGridNode, b: TileGridNode) {
   return a.f - b.f;
 }
 
@@ -13,14 +13,15 @@ export function getGridSolvingPath(
   targetGrid: TileGrid,
   moves: MoveType[]
 ): Move[] | undefined {
-  const openList: Map<string, Node> = new Map();
-  const closedList: Set<string> = new Set();
+  const openList = new Map<string, TileGridNode>();
+  const closedList = new Set<string>();
 
-  const targetNode = new Node(targetGrid, []);
-  const startingNode = new Node(originGrid, []);
+  const targetNode = new TileGridNode(targetGrid, []);
+  const startingNode = new TileGridNode(originGrid, []);
   openList.set(startingNode.serialized, startingNode);
 
   while (openList.size !== 0) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const currentNode = [...openList.values()].sort(bySmallestF)[0]!;
 
     if (currentNode.isEqual(targetNode)) {
@@ -33,8 +34,8 @@ export function getGridSolvingPath(
 
     for (let i = 0; i < neighborObjects.length; i++) {
       const neighborNode = currentNode.createNewNode(
-        neighborObjects[i].grid,
-        neighborObjects[i].move
+        neighborObjects[i]!.grid,
+        neighborObjects[i]!.move
       );
 
       if (closedList.has(neighborNode.serialized)) {
@@ -47,7 +48,7 @@ export function getGridSolvingPath(
 
       const sameOpenListNode = openList.get(neighborNode.serialized);
 
-      if (sameOpenListNode) {
+      if (sameOpenListNode != null) {
         if (neighborNode.g > sameOpenListNode.g) {
           continue;
         }

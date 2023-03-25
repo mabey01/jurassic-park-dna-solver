@@ -1,6 +1,6 @@
-import { motion, Transition } from "framer-motion";
+import { motion, type Transition } from "framer-motion";
 import { useMemo } from "react";
-import { TileGrid } from "../../types";
+import { type TileGrid } from "../../types";
 import { Tile } from "../tile";
 
 const transitionConfig: Transition = {
@@ -14,7 +14,7 @@ interface SolvingGridProps {
 }
 
 export function SolvingGrid({ currentGrid }: SolvingGridProps) {
-  const gridColumns = currentGrid[0].length;
+  const gridColumns = currentGrid[0]!.length;
   const gridItems = useMemo(() => currentGrid.flat(), [currentGrid]);
 
   return (

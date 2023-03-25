@@ -1,10 +1,10 @@
-type PriorityQueueNode<T> = {
+interface PriorityQueueNode<T> {
   priority: number;
   value: T;
-};
+}
 
 export class PriorityQueue<T> {
-  private heap: PriorityQueueNode<T>[];
+  private heap: Array<PriorityQueueNode<T>>;
 
   constructor() {
     this.heap = [];
@@ -38,21 +38,21 @@ export class PriorityQueue<T> {
     return this.getParentIndex(index) >= 0;
   }
 
-  private leftChild(index: number): PriorityQueueNode<T> {
+  private leftChild(index: number): PriorityQueueNode<T> | undefined {
     return this.heap[this.getLeftChildIndex(index)];
   }
 
-  private rightChild(index: number): PriorityQueueNode<T> {
+  private rightChild(index: number): PriorityQueueNode<T> | undefined {
     return this.heap[this.getRightChildIndex(index)];
   }
 
-  private parent(index: number): PriorityQueueNode<T> {
+  private parent(index: number): PriorityQueueNode<T> | undefined {
     return this.heap[this.getParentIndex(index)];
   }
 
   private swap(indexOne: number, indexTwo: number): void {
-    const temp = this.heap[indexOne];
-    this.heap[indexOne] = this.heap[indexTwo];
+    const temp = this.heap[indexOne]!;
+    this.heap[indexOne] = this.heap[indexTwo]!;
     this.heap[indexTwo] = temp;
   }
 
@@ -60,7 +60,7 @@ export class PriorityQueue<T> {
   private heapifyUp(index: number): void {
     if (!this.hasParent(index)) return;
 
-    if (this.parent(index).priority > this.heap[index].priority) {
+    if (this.parent(index)!.priority > this.heap[index]!.priority) {
       this.swap(this.getParentIndex(index), index);
       this.heapifyUp(this.getParentIndex(index));
     }
@@ -73,12 +73,12 @@ export class PriorityQueue<T> {
     let smallerChildIndex = this.getLeftChildIndex(index);
     if (
       this.hasRightChild(index) &&
-      this.rightChild(index).priority < this.leftChild(index).priority
+      this.rightChild(index)!.priority < this.leftChild(index)!.priority
     ) {
       smallerChildIndex = this.getRightChildIndex(index);
     }
 
-    if (this.heap[index].priority < this.heap[smallerChildIndex].priority) {
+    if (this.heap[index]!.priority < this.heap[smallerChildIndex]!.priority) {
       return;
     }
 
@@ -91,7 +91,7 @@ export class PriorityQueue<T> {
       return undefined;
     }
 
-    return this.heap[0].value;
+    return this.heap[0]!.value;
   }
 
   public add(priority: number, value: T): void {
@@ -104,7 +104,7 @@ export class PriorityQueue<T> {
       return undefined;
     }
 
-    const minValue = this.heap[0];
+    const minValue = this.heap[0]!;
     this.heap[0] = this.heap.pop() as PriorityQueueNode<T>;
     this.heapifyDown();
     return minValue.value;

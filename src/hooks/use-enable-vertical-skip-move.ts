@@ -1,24 +1,18 @@
-import { useAtom } from "jotai";
-import { enabledMovesAtom } from "../state/moves";
+import { useState } from "react";
 
 export function useEnableVerticalSkipMove() {
-  const [moves, setMoves] = useAtom(enabledMovesAtom);
+  const [isEnabled, setIsEnabled] = useState(true);
 
-  const isVerticalSkipMoveEnabled = moves.includes("VERTICAL_SKIP");
   const enableVerticalSkipMove = () => {
-    setMoves((moves) => {
-      if (moves.includes("VERTICAL_SKIP")) return moves;
-
-      return [...moves, "VERTICAL_SKIP"];
-    });
+    setIsEnabled(true);
   };
 
   const disableVerticalSkipMove = () => {
-    setMoves((moves) => moves.filter((move) => move !== "VERTICAL_SKIP"));
+    setIsEnabled(false);
   };
 
   return {
-    isVerticalSkipMoveEnabled,
+    isVerticalSkipMoveEnabled: isEnabled,
     enableVerticalSkipMove,
     disableVerticalSkipMove,
   };

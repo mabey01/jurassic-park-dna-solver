@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { TileGrid } from "../../../types";
+import { type TileGrid } from "../../../types";
 import { isEqual } from "./is-equal";
 
 test("return true for an equal grid", () => {

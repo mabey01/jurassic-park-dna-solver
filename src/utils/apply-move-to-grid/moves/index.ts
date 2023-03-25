@@ -1,4 +1,4 @@
-import { GridPosition } from "../../../types";
+import { type GridPosition } from "../../../types";
 import { applyHorizontalMoveToGrid } from "./horizontal";
 import { applyLeftToRightDiagonallyMoveToGrid } from "./left-to-right-diagonally";
 import { applyRightToLeftDiagonallyMoveToGrid } from "./right-to-left-diagonally";
@@ -15,7 +15,7 @@ export const MOVE_SET = {
 
 export type MoveType = keyof typeof MOVE_SET;
 
-export type Move = {
+export interface Move {
   type: MoveType;
   originTilePosition: GridPosition;
-};
+}
