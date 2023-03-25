@@ -10,7 +10,7 @@ function getTileBackgroundColor(tileType: TileType) {
 
 interface TileProps extends ComponentProps<"div"> {
   type: TileType;
-  isSelected: boolean;
+  isSelected?: boolean;
 }
 
 export const Tile = forwardRef<HTMLDivElement, TileProps>(
@@ -19,7 +19,7 @@ export const Tile = forwardRef<HTMLDivElement, TileProps>(
       <div
         ref={forwardedRef}
         {...props}
-        className="cursor-pointer w-full h-full rounded-md flex justify-center items-center text-white font-bold text-2xl"
+        className="flex h-full w-full cursor-pointer items-center justify-center rounded-md text-2xl font-bold text-white"
         style={{
           backgroundColor: getTileBackgroundColor(type),
           border: isSelected ? "4px black solid" : "none",

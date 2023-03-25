@@ -4,6 +4,7 @@ import { ComponentProps } from "react";
 import { Link, LinkProps, Navigate } from "react-router-dom";
 import { Grid } from "./components/grid";
 import { Solution } from "./components/solution";
+import { SolvingGrid } from "./components/solving-grid";
 import { useEnableVerticalSkipMove } from "./hooks/use-enable-vertical-skip-move";
 import { useSolveGrid } from "./hooks/use-solve";
 import { originGridAtom, targetGridAtom } from "./state/grids";
@@ -122,6 +123,7 @@ export function TargetGridPage() {
 }
 
 export function ResultPage() {
+  const originGrid = useAtomValue(originGridAtom);
   const resultsState = useAtomValue(solutionStateAtom);
 
   if (resultsState.state === "idle") {
@@ -163,6 +165,12 @@ export function ResultPage() {
     <PageLayout className=" bg-green-500 text-neutral-50">
       <div className="flex-1 sm:flex-grow-0">
         <PageHeadline>Solution</PageHeadline>
+        <div>
+          <SolvingGrid
+            sourceGrid={originGrid}
+            solvingPath={resultsState.solvingPath}
+          />
+        </div>
         <div className="mt-2 sm:mt-8">
           <Solution solution={resultsState} />
         </div>
