@@ -45,8 +45,8 @@ export function generateDefaultGrid(
   return rows.map((_, rowIndex) => {
     const columns = new Array(numberOfColumns).fill(0);
     return columns.map((_, columnIndex) => {
-      if (DEFAULT_GRID_POSITIONS[rowIndex][columnIndex]) {
-        return DEFAULT_GRID_POSITIONS[rowIndex][columnIndex];
+      if (DEFAULT_GRID_POSITIONS[rowIndex]?.[columnIndex]) {
+        return DEFAULT_GRID_POSITIONS[rowIndex]![columnIndex]!;
       }
 
       return {

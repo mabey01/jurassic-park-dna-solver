@@ -12,7 +12,7 @@ import { Solution } from "./components/solution";
 import { SolvingPathVisualization } from "./components/solving-path-visualization/solving-path-visualization";
 import { useEnableVerticalSkipMove } from "./hooks/use-enable-vertical-skip-move";
 import { useSolveGrid } from "./hooks/use-solve";
-import { useSyncUrlState } from "./hooks/use-url-param-state";
+import { useSyncUrlState } from "./hooks/use-sync-url-state";
 import { generateDefaultGrid } from "./utils/generate-random-grid/generate-default-grid";
 import { getEnabledMoveTypes } from "./utils/get-enabled-move-types/get-enabled-move-types";
 import {

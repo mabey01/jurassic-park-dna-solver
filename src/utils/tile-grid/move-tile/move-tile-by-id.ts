@@ -11,7 +11,7 @@ export function moveTileById(
 ) {
   return applyGridTransformation(grid, (flatGird) => {
     const originTileFlatGridIndex = getIndexById(flatGird, originTileId);
-    const originTile = flatGird[originTileFlatGridIndex];
+    const originTile = flatGird[originTileFlatGridIndex]!;
 
     const targetTileFlatGridIndex = getIndexById(flatGird, targetTileId);
 

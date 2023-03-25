@@ -4,13 +4,13 @@ import { replaceEntry } from "../../arrays/replace-entry/replace-entry";
 export function applyVerticalMoveToGrid(
   grid: TileGrid,
   [originRowIndex, originColumnIndex]: GridPosition
-) {
+): TileGrid {
   if (originRowIndex === grid.length - 1) {
     throw new Error("Cannot vertical switch bottom most element");
   }
 
-  const originTileValue = grid[originRowIndex][originColumnIndex];
-  const targetTileValue = grid[originRowIndex + 1][originColumnIndex];
+  const originTileValue = grid[originRowIndex]![originColumnIndex]!;
+  const targetTileValue = grid[originRowIndex + 1]![originColumnIndex]!;
 
   return grid.map((row, rowIndex) => {
     if (rowIndex === originRowIndex) {

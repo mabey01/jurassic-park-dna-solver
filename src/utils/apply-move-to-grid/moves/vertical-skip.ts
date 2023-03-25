@@ -4,7 +4,7 @@ import { replaceEntry } from "../../arrays/replace-entry/replace-entry";
 export function applyVerticalSkipMoveToGrid(
   grid: TileGrid,
   [originRowIndex, originColumnIndex]: GridPosition
-) {
+): TileGrid {
   /**
    * x x x x
    * x x x x
@@ -16,8 +16,8 @@ export function applyVerticalSkipMoveToGrid(
     throw new Error("Cannot vertically skip beyond the edge");
   }
 
-  const originTileValue = grid[originRowIndex][originColumnIndex];
-  const targetTileValue = grid[originRowIndex + 2][originColumnIndex];
+  const originTileValue = grid[originRowIndex]![originColumnIndex]!;
+  const targetTileValue = grid[originRowIndex + 2]![originColumnIndex]!;
 
   return grid.map((row, rowIndex) => {
     if (rowIndex === originRowIndex) {

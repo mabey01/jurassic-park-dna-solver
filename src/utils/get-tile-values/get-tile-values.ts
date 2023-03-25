@@ -6,7 +6,7 @@ export function getTileValues(numberOfTiles = 8) {
   const tileValues: TileType[] = [];
 
   while (tileValues.length !== numberOfTiles) {
-    const tileValue = TILE_VALUES[tileValues.length % TILE_VALUES.length];
+    const tileValue = TILE_VALUES[tileValues.length % TILE_VALUES.length]!;
     tileValues.push(tileValue);
   }
 

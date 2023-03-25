@@ -11,7 +11,7 @@ export function moveEntry<T>(
   const actualOriginIndex = getActualIndex(array, originIndex);
   const actualTargetIndex = getActualInsertingIndex(array, targetIndex);
 
-  const entry = array[actualOriginIndex];
+  const entry = array[actualOriginIndex]!;
   const cleanArray = removeEntry(array, actualOriginIndex);
   return insertEntry(cleanArray, actualTargetIndex, entry);
 }

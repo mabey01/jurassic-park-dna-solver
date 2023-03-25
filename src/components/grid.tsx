@@ -68,7 +68,7 @@ export function Grid({ grid, onUpdateGrid }: GridProps) {
     }
   };
 
-  const gridColumns = grid[0].length;
+  const gridColumns = grid[0]!.length;
   const gridItems = grid.flat();
   const getGridEntryPosition = (index: number): GridPosition => [index, index];
 

@@ -9,7 +9,7 @@ export function getUnflattenGrid<T>(
       const rowNumber = Math.floor(index / numberOfColumns);
 
       if (grid[rowNumber]) {
-        grid[rowNumber].push(gridEntry);
+        grid[rowNumber]!.push(gridEntry);
         return grid;
       }
 

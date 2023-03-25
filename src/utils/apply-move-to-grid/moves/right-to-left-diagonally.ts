@@ -5,7 +5,7 @@ import { isLastRow } from "../../grid/is-last-row/is-last-row";
 export function applyRightToLeftDiagonallyMoveToGrid(
   grid: TileGrid,
   [originRowIndex, originColumnIndex]: GridPosition
-) {
+): TileGrid {
   if (originColumnIndex === 0) {
     throw new Error(
       "Cannot move right to left diagonally from the first column"
@@ -16,8 +16,8 @@ export function applyRightToLeftDiagonallyMoveToGrid(
     throw new Error("Cannot move right to left diagonally from the last row");
   }
 
-  const originTileValue = grid[originRowIndex][originColumnIndex];
-  const targetTileValue = grid[originRowIndex + 1][originColumnIndex - 1];
+  const originTileValue = grid[originRowIndex]![originColumnIndex]!;
+  const targetTileValue = grid[originRowIndex + 1]![originColumnIndex - 1]!;
 
   return grid.map((row, rowIndex) => {
     if (rowIndex === originRowIndex) {

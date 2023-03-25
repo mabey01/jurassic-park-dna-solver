@@ -30,8 +30,8 @@ export function getGridSolvingPath(
 
     for (let i = 0; i < neighborObjects.length; i++) {
       const neighborNode = currentNode.createNewNode(
-        neighborObjects[i].grid,
-        neighborObjects[i].move
+        neighborObjects[i]!.grid,
+        neighborObjects[i]!.move
       );
 
       if (closedList.has(neighborNode.serialized)) {

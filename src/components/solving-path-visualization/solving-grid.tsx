@@ -14,7 +14,7 @@ interface SolvingGridProps {
 }
 
 export function SolvingGrid({ currentGrid }: SolvingGridProps) {
-  const gridColumns = currentGrid[0].length;
+  const gridColumns = currentGrid[0]!.length;
   const gridItems = useMemo(() => currentGrid.flat(), [currentGrid]);
 
   return (

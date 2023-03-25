@@ -4,8 +4,8 @@ import { switchEntries } from "../../arrays/switch-entries/switch-entries";
 export function applyHorizontalMoveToGrid(
   grid: TileGrid,
   [originRowIndex, originColumnIndex]: GridPosition
-) {
-  if (originColumnIndex === grid[originRowIndex].length - 1) {
+): TileGrid {
+  if (originColumnIndex === grid[originRowIndex]!.length - 1) {
     throw new Error("Cannot switch rightmost element");
   }
 

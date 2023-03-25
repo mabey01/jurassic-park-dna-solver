@@ -26,6 +26,7 @@ module.exports = {
     "@typescript-eslint/consistent-type-assertions": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
-    "@typescript-eslint/triple-slash-reference": "off"
+    "@typescript-eslint/triple-slash-reference": "off",
+    "@typescript-eslint/no-non-null-assertion": "off"
   }
 }

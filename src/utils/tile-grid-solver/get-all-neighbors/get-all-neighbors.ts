@@ -55,7 +55,7 @@ export function getAllNeighborObjects(
     ) {
       const neighborObject = getNeighborObject(
         grid,
-        enabledMoves[enabledMoveIndex],
+        enabledMoves[enabledMoveIndex]!,
         flatGridIndex
       );
       if (neighborObject != null) {

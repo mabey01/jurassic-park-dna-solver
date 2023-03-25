@@ -8,7 +8,7 @@ export function serializeTile(tile: Tile) {
 export function unserializeTile(tileString: string) {
   const [id, type] = tileString.split("-");
 
-  if (isTileType(type)) {
+  if (id && type && isTileType(type)) {
     return {
       id,
       type,
