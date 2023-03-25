@@ -1,18 +1,18 @@
 import { TileGrid } from "../../../types";
 import { Move, MoveType } from "../../apply-move-to-grid/moves";
 import { getAllNeighborObjects } from "../get-all-neighbors/get-all-neighbors";
-import { Node } from "../node";
+import { TileGridNode } from "../tile-grid-node";
 import { getManhattenDistance } from "../../tile-grid/get-manhatten-distance/get-manhatten-distance";
 
-function bySmallestG(a: Node, b: Node) {
+function bySmallestG(a: TileGridNode, b: TileGridNode) {
   return a.f - b.f;
 }
 
-function isAlreadyInList(list: Node[], node: Node) {
+function isAlreadyInList(list: TileGridNode[], node: TileGridNode) {
   return list.some((listNode) => node.isEqual(listNode));
 }
 
-function getEqualListEntry(list: Node[], node: Node) {
+function getEqualListEntry(list: TileGridNode[], node: TileGridNode) {
   return list.find((listNode) => node.isEqual(listNode));
 }
 
@@ -21,11 +21,11 @@ export function getShortestSolveMoves(
   targetGrid: TileGrid,
   moves: MoveType[]
 ): Move[] | undefined {
-  const openList: Node[] = [];
-  const closedList: Node[] = [];
+  const openList: TileGridNode[] = [];
+  const closedList: TileGridNode[] = [];
 
-  const targetNode = new Node(targetGrid, []);
-  const startingNode = new Node(originGrid, []);
+  const targetNode = new TileGridNode(targetGrid, []);
+  const startingNode = new TileGridNode(originGrid, []);
   openList.push(startingNode);
 
   while (openList.length !== 0) {

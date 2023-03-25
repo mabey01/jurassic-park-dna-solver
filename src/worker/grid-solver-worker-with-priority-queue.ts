@@ -2,7 +2,7 @@ import { TileGrid } from "../types";
 import { Move, MoveType } from "../utils/apply-move-to-grid/moves";
 import { PriorityQueue } from "../utils/priority-queue/priority-queue";
 import { getAllNeighborObjects } from "../utils/tile-grid-solver/get-all-neighbors/get-all-neighbors";
-import { Node } from "../utils/tile-grid-solver/node";
+import { TileGridNode } from "../utils/tile-grid-solver/tile-grid-node";
 import { getManhattenDistance } from "../utils/tile-grid/get-manhatten-distance/get-manhatten-distance";
 
 export function getGridSolvingPath(
@@ -10,11 +10,11 @@ export function getGridSolvingPath(
   targetGrid: TileGrid,
   moves: MoveType[]
 ): Move[] | undefined {
-  const openList = new PriorityQueue<Node>();
+  const openList = new PriorityQueue<TileGridNode>();
   const closedList: Set<string> = new Set();
 
-  const targetNode = new Node(targetGrid, []);
-  const startingNode = new Node(originGrid, []);
+  const targetNode = new TileGridNode(targetGrid, []);
+  const startingNode = new TileGridNode(originGrid, []);
   openList.add(startingNode.f, startingNode);
 
   while (openList.length !== 0) {

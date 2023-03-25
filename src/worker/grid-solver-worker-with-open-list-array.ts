@@ -1,10 +1,10 @@
 import { TileGrid } from "../types";
 import { Move, MoveType } from "../utils/apply-move-to-grid/moves";
 import { getAllNeighborObjects } from "../utils/tile-grid-solver/get-all-neighbors/get-all-neighbors";
-import { Node } from "../utils/tile-grid-solver/node";
+import { TileGridNode } from "../utils/tile-grid-solver/tile-grid-node";
 import { getManhattenDistance } from "../utils/tile-grid/get-manhatten-distance/get-manhatten-distance";
 
-function bySmallestF(a: Node, b: Node) {
+function bySmallestF(a: TileGridNode, b: TileGridNode) {
   return a.f - b.f;
 }
 
@@ -13,11 +13,11 @@ export function getGridSolvingPath(
   targetGrid: TileGrid,
   moves: MoveType[]
 ): Move[] | undefined {
-  const openList: Map<string, Node> = new Map();
+  const openList: Map<string, TileGridNode> = new Map();
   const closedList: Set<string> = new Set();
 
-  const targetNode = new Node(targetGrid, []);
-  const startingNode = new Node(originGrid, []);
+  const targetNode = new TileGridNode(targetGrid, []);
+  const startingNode = new TileGridNode(originGrid, []);
   openList.set(startingNode.serialized, startingNode);
 
   while (openList.size !== 0) {

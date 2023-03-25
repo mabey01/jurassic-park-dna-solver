@@ -1,8 +1,9 @@
 import { TileGrid } from "../../types";
 import { Move } from "../apply-move-to-grid/moves";
 import { getFlatGrid } from "../grid/get-flat-grid/get-flat-grid";
+import { serializeGrid } from "../tile-grid/serialize-grid/serialize-grid";
 
-export class Node {
+export class TileGridNode {
   grid: TileGrid;
   path: Move[];
   serialized: string;
@@ -15,16 +16,17 @@ export class Node {
     this.grid = grid;
     this.path = path;
 
-    this.serialized = getFlatGrid(grid)
+    this.serialized = grid
+      .flat()
       .map((tile) => tile.type)
-      .join("");
+      .join();
   }
 
   createNewNode(grid: TileGrid, move: Move) {
-    return new Node(grid, [...this.path, move]);
+    return new TileGridNode(grid, [...this.path, move]);
   }
 
-  isEqual(node: Node) {
+  isEqual(node: TileGridNode) {
     return this.serialized === node.serialized;
   }
 }

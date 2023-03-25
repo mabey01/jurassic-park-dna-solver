@@ -1,21 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { OriginGridPage, ResultPage, TargetGridPage } from "./App";
-import { createMemoryRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
 
-const router = createMemoryRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <OriginGridPage />,
   },
   {
-    path: "/target-grid",
+    path: "/:serializedOriginGrid",
     element: <TargetGridPage />,
   },
   {
-    path: "/results",
+    path: "/results/:serializedOriginGrid/:serializedTargetGrid",
     element: <ResultPage />,
   },
 ]);

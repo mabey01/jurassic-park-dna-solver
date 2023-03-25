@@ -1,23 +1,50 @@
-import { useAtom, useAtomValue } from "jotai";
-import { useCallback, useMemo } from "react";
-import { enabledMovesAtom } from "../state/moves";
-import { originGridAtom, targetGridAtom } from "../state/grids";
-import { solutionStateAtom } from "../state/solution";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { TileGrid } from "../types";
+import { Move, MoveType } from "../utils/apply-move-to-grid/moves";
 import { isEqual } from "../utils/tile-grid/is-equal/is-equal";
+
+type IdleSolutionState = {
+  state: "idle";
+};
+
+type SolvingSolutionState = {
+  state: "solving";
+};
+
+type GridsAreEqualSolutionState = {
+  state: "grids-are-equal";
+};
+
+export type SolvedSolutionState = {
+  state: "solved";
+  meta: {
+    duration: number;
+  };
+  solvingPath: Move[];
+};
+
+export type SolutionState =
+  | IdleSolutionState
+  | GridsAreEqualSolutionState
+  | SolvingSolutionState
+  | SolvedSolutionState;
 
 const MINIMUM_RUNTIME_MS = 500;
 
-export function useSolveGrid() {
-  const [solutionState, setSolutionState] = useAtom(solutionStateAtom);
-  const originGrid = useAtomValue(originGridAtom);
-  const targetGrid = useAtomValue(targetGridAtom);
-  const moves = useAtomValue(enabledMovesAtom);
+export function useSolveGrid(
+  originGrid: TileGrid,
+  targetGrid: TileGrid,
+  moves: MoveType[]
+) {
+  const [solutionState, setSolutionState] = useState<SolutionState>({
+    state: "idle",
+  });
 
   const solverWorkerInstance = useMemo(
     () =>
-      new ComlinkWorker<
-        typeof import("../worker/grid-solver-worker-with-open-list-array")
-      >(new URL("../worker/index", import.meta.url)),
+      new ComlinkWorker<typeof import("../worker/index")>(
+        new URL("../worker", import.meta.url)
+      ),
     []
   );
 
@@ -78,5 +105,9 @@ export function useSolveGrid() {
     }, timeoutTime);
   }, [solutionState, setSolutionState, originGrid, targetGrid, moves]);
 
-  return solveGrid;
+  useEffect(() => {
+    solveGrid();
+  }, []);
+
+  return solutionState;
 }
