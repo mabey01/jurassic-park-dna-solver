@@ -1,4 +1,4 @@
-import { TileGrid, GridPosition } from "../../../types";
+import { type TileGrid, type GridPosition } from "../../../types";
 import { switchEntries } from "../../arrays/switch-entries/switch-entries";
 
 export function applyHorizontalMoveToGrid(
@@ -10,7 +10,7 @@ export function applyHorizontalMoveToGrid(
   }
 
   return grid.map((row, rowIndex) => {
-    if (rowIndex == originRowIndex) {
+    if (rowIndex === originRowIndex) {
       return switchEntries(row, originColumnIndex, originColumnIndex + 1);
     }
 

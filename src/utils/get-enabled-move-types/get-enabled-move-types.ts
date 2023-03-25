@@ -1,4 +1,4 @@
-import { Move, MoveType } from "../apply-move-to-grid/moves";
+import { type MoveType } from "../apply-move-to-grid/moves";
 
 const DEFAULT_MOVES = [
   "HORIZONTAL_SWITCH",

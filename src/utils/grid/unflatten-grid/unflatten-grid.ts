@@ -1,4 +1,4 @@
-import { GridDimensions } from "../../../types";
+import { type GridDimensions } from "../../../types";
 
 export function getUnflattenGrid<T>(
   flatGrid: T[],

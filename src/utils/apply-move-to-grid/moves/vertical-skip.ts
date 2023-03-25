@@ -1,4 +1,4 @@
-import { GridPosition, TileGrid } from "../../../types";
+import { type GridPosition, type TileGrid } from "../../../types";
 import { replaceEntry } from "../../arrays/replace-entry/replace-entry";
 
 export function applyVerticalSkipMoveToGrid(
@@ -20,7 +20,7 @@ export function applyVerticalSkipMoveToGrid(
   const targetTileValue = grid[originRowIndex + 2][originColumnIndex];
 
   return grid.map((row, rowIndex) => {
-    if (rowIndex == originRowIndex) {
+    if (rowIndex === originRowIndex) {
       return replaceEntry(row, originColumnIndex, targetTileValue);
     }
 

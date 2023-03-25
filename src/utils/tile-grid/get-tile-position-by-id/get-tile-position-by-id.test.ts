@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { Tile } from "../../../types";
+import { type Tile } from "../../../types";
 import { getTilePositionById } from "./get-tile-position-by-id";
 
 test("should return [0, 0] for the first entry", () => {

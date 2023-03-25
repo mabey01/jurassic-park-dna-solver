@@ -1,5 +1,5 @@
-import { ComponentProps, forwardRef } from "react";
-import { TileType } from "../types";
+import { type ComponentProps, forwardRef } from "react";
+import { type TileType } from "../types";
 
 function getTileBackgroundColor(tileType: TileType) {
   if (tileType === "a") return "#93869a";
@@ -22,7 +22,7 @@ export const Tile = forwardRef<HTMLDivElement, TileProps>(
         className="flex h-full w-full items-center justify-center rounded-md text-2xl font-bold text-white"
         style={{
           backgroundColor: getTileBackgroundColor(type),
-          border: isSelected ? "4px black solid" : "none",
+          border: isSelected !== undefined ? "4px black solid" : "none",
         }}
       >
         {type.toUpperCase()}
@@ -30,3 +30,5 @@ export const Tile = forwardRef<HTMLDivElement, TileProps>(
     );
   }
 );
+
+Tile.displayName = "Tile";

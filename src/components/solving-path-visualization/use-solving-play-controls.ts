@@ -41,7 +41,7 @@ export function useSolvingPlayControls() {
 
   const canGoToPreviousMoveIndex = currentMoveIndex - 1 >= minMoveIndex;
   const canGoToNextMoveIndex = currentMoveIndex + 1 <= maxMoveIndex;
-  const canReplay = currentMoveIndex == maxMoveIndex && !isPlaying;
+  const canReplay = currentMoveIndex === maxMoveIndex && !isPlaying;
 
   return {
     isPlaying,

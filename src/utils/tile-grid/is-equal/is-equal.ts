@@ -1,4 +1,4 @@
-import { TileGrid } from "../../../types";
+import { type TileGrid } from "../../../types";
 import { getFlatGrid } from "../../grid/get-flat-grid/get-flat-grid";
 
 export function isEqual(a: TileGrid, b: TileGrid) {

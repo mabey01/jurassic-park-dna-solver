@@ -10,7 +10,8 @@ test("should return undefined if polled on an empty queue", () => {
 test("should return element that was just passed in", () => {
   const queue = new PriorityQueue<number>();
 
-  queue.add(0, 10), expect(queue.poll()).toEqual(10);
+  queue.add(0, 10);
+  expect(queue.poll()).toEqual(10);
 });
 
 test("should return the element with the lowest priority when multiple elements are added", () => {

@@ -17,7 +17,7 @@ export function SolvingGridProgressBar() {
       value={[currentMoveIndex]}
       min={minMoveIndex}
       max={maxMoveIndex}
-      onValueChange={([currentValue]) => setCurrentMoveIndex(currentValue)}
+      onValueChange={([currentValue]) => { setCurrentMoveIndex(currentValue); }}
     >
       <Slider.Track className="relative h-[3px] grow rounded-full bg-white/20">
         <Slider.Range className="absolute h-full rounded-full bg-white" />

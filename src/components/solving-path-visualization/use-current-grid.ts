@@ -1,8 +1,8 @@
 import { useAtom } from "jotai";
 import { useMemo, useEffect } from "react";
-import { TileGrid } from "../../types";
+import { type TileGrid } from "../../types";
 import { applyMoveToGrid } from "../../utils/apply-move-to-grid/apply-move-to-grid";
-import { Move } from "../../utils/apply-move-to-grid/moves";
+import { type Move } from "../../utils/apply-move-to-grid/moves";
 import { currentMoveIndexAtom, solvingPlayStateAtom } from "./state";
 
 export function useCurrentGrid(

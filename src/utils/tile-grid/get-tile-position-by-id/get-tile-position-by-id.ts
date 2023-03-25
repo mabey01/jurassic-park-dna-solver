@@ -1,4 +1,4 @@
-import { TileGrid, GridPosition } from "../../../types";
+import { type TileGrid, type GridPosition } from "../../../types";
 
 export function getTilePositionById(
   grid: TileGrid,

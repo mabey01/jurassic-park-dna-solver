@@ -1,10 +1,10 @@
-type PriorityQueueNode<T> = {
+interface PriorityQueueNode<T> {
   priority: number;
   value: T;
-};
+}
 
 export class PriorityQueue<T> {
-  private heap: PriorityQueueNode<T>[];
+  private heap: Array<PriorityQueueNode<T>>;
 
   constructor() {
     this.heap = [];

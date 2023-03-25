@@ -1,4 +1,4 @@
-import { GridPosition } from "../../../types";
+import { type GridPosition } from "../../../types";
 import { getFlatGrid } from "../get-flat-grid/get-flat-grid";
 import { getGridPositionByFlatIndex } from "../get-grid-position-by-flat-index/get-grid-position-by-flat-index";
 

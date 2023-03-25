@@ -1,10 +1,10 @@
-import { GridPosition } from "../../../types";
+import { type GridPosition } from "../../../types";
 
 export function getDistanceByPositions(
   aPosition?: GridPosition,
   bPosition?: GridPosition
 ) {
-  if (!aPosition || !bPosition) return NaN;
+  if ((aPosition == null) || (bPosition == null)) return NaN;
 
   return (
     Math.abs(aPosition[0] - bPosition[0]) +

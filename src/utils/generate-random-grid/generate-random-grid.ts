@@ -1,4 +1,4 @@
-import { TileGrid, TileType } from "../../types";
+import { type TileGrid, type TileType } from "../../types";
 import { getTileValues } from "../get-tile-values/get-tile-values";
 import { popRandomEntry } from "../arrays/pop-random-entry/pop-random-entry";
 

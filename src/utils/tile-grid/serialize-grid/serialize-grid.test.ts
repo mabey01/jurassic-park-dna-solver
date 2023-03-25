@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { TileGrid } from "../../../types";
+import { type TileGrid } from "../../../types";
 import { serializeGrid, unserializeGrid } from "./serialize-grid";
 
 test("should return serialized string", () => {
@@ -36,11 +36,11 @@ test("should return an unserialized grid", () => {
 test("should throw if serialized grid is empty string", () => {
   const serializedGrid = "";
 
-  expect(() => unserializeGrid(serializedGrid)).not.toThrowError;
+  expect(() => unserializeGrid(serializedGrid)).toThrowError();
 });
 
 test("should throw if serialized grid contains unsupported tile values", () => {
   const serializedGrid = "a,c|g,X";
 
-  expect(() => unserializeGrid(serializedGrid)).toThrowError;
+  expect(() => unserializeGrid(serializedGrid)).toThrowError();
 });

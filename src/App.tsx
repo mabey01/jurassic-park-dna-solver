@@ -1,6 +1,11 @@
 import * as Checkbox from "@radix-ui/react-checkbox";
-import { ComponentProps, useMemo } from "react";
-import { Link, LinkProps, useParams, useSearchParams } from "react-router-dom";
+import { type ComponentProps, useMemo } from "react";
+import {
+  Link,
+  type LinkProps,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import invariant from "tiny-invariant";
 import { Grid } from "./components/grid";
 import { Solution } from "./components/solution";
@@ -101,9 +106,11 @@ export function TargetGridPage() {
         <div className="flex items-center gap-2 sm:justify-end">
           <Checkbox.Root
             checked={isVerticalSkipMoveEnabled}
-            onCheckedChange={(isChecked) =>
-              isChecked ? enableVerticalSkipMove() : disableVerticalSkipMove()
-            }
+            onCheckedChange={(isChecked) => {
+              isChecked !== null
+                ? enableVerticalSkipMove()
+                : disableVerticalSkipMove();
+            }}
             id="enable-vertical-skip-move"
             className="flex h-6 w-6 appearance-none items-center justify-center rounded-md bg-white outline-none hover:bg-neutral-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
           >

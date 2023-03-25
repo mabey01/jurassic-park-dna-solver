@@ -1,4 +1,4 @@
-import { TileGrid, GridPosition } from "../../../types";
+import { type TileGrid, type GridPosition } from "../../../types";
 import { replaceEntry } from "../../arrays/replace-entry/replace-entry";
 import { isLastColumn } from "../../grid/is-last-column/is-last-column";
 import { isLastRow } from "../../grid/is-last-row/is-last-row";
@@ -21,7 +21,7 @@ export function applyLeftToRightDiagonallyMoveToGrid(
   const targetTileValue = grid[originRowIndex + 1][originColumnIndex + 1];
 
   return grid.map((row, rowIndex) => {
-    if (rowIndex == originRowIndex) {
+    if (rowIndex === originRowIndex) {
       return replaceEntry(row, originColumnIndex, targetTileValue);
     }
 

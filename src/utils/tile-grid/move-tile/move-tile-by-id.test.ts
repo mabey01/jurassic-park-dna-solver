@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { TileGrid } from "../../../types";
+import { type TileGrid } from "../../../types";
 import { moveTileById } from "./move-tile-by-id";
 
 test("move position of the 2nd entry in front of 1st entry", () => {

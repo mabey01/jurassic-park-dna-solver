@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { TileGrid } from "../../../types";
+import { type TileGrid } from "../../../types";
 import { getAllNeighborObjects } from "./get-all-neighbors";
 
 test("return a list for each grid tile times enabled moves", () => {

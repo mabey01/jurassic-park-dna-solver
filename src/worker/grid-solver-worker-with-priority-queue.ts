@@ -1,5 +1,5 @@
-import { TileGrid } from "../types";
-import { Move, MoveType } from "../utils/apply-move-to-grid/moves";
+import { type TileGrid } from "../types";
+import { type Move, type MoveType } from "../utils/apply-move-to-grid/moves";
 import { PriorityQueue } from "../utils/priority-queue/priority-queue";
 import { getAllNeighborObjects } from "../utils/tile-grid-solver/get-all-neighbors/get-all-neighbors";
 import { TileGridNode } from "../utils/tile-grid-solver/tile-grid-node";
@@ -11,13 +11,14 @@ export function getGridSolvingPath(
   moves: MoveType[]
 ): Move[] | undefined {
   const openList = new PriorityQueue<TileGridNode>();
-  const closedList: Set<string> = new Set();
+  const closedList = new Set<string>();
 
   const targetNode = new TileGridNode(targetGrid, []);
   const startingNode = new TileGridNode(originGrid, []);
   openList.add(startingNode.f, startingNode);
 
   while (openList.length !== 0) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const currentNode = openList.poll()!;
 
     if (currentNode.isEqual(targetNode)) {

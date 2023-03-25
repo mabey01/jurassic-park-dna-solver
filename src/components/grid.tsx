@@ -1,7 +1,7 @@
 import {
   closestCenter,
   DndContext,
-  DragEndEvent,
+  type DragEndEvent,
   KeyboardSensor,
   MouseSensor,
   TouchSensor,
@@ -13,10 +13,10 @@ import {
   SortableContext,
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
-import { motion, Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { useAtom } from "jotai";
 import { selectedGridEntryPositionAtom } from "../state/selected-grid-entry";
-import { TileGrid, GridPosition } from "../types";
+import { type TileGrid, type GridPosition } from "../types";
 import { isSamePosition } from "../utils/tile-grid/is-same-position";
 import { moveTileById } from "../utils/tile-grid/move-tile/move-tile-by-id";
 import { SortableItem } from "./sortable-item";
@@ -60,6 +60,7 @@ export function Grid({ grid, onUpdateGrid }: GridProps) {
       const newGrid = moveTileById(
         grid,
         active.id.toString(),
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         over!.id.toString()
       );
 
@@ -101,9 +102,9 @@ export function Grid({ grid, onUpdateGrid }: GridProps) {
                     getGridEntryPosition(index),
                     selectedGridItem
                   )}
-                  onClick={() =>
-                    setSelectedGridItem(getGridEntryPosition(index))
-                  }
+                  onClick={() => {
+                    setSelectedGridItem(getGridEntryPosition(index));
+                  }}
                 />
               </motion.div>
             </SortableItem>

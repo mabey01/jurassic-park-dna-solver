@@ -11,7 +11,9 @@ export function useSyncUrlState<T>(
   const serializedState = searchParams.get(name);
 
   const state = useMemo(() => {
-    return serializedState ? unserializeState(serializedState) : defaultState;
+    if (serializedState === null) return defaultState;
+
+    return unserializeState(serializedState);
   }, [serializedState]);
 
   const setState = (newState: T) => {

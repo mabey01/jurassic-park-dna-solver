@@ -1,4 +1,4 @@
-import { GridPosition } from "../../../types";
+import { type GridPosition } from "../../../types";
 import { getGridDimensions } from "../get-grid-dimensions/get-grid-dimensions";
 
 export function getGridPositionByFlatIndex<T>(

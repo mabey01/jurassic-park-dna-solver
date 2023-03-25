@@ -6,7 +6,7 @@ export function getGridDimensions<T>(grid: T[][]) {
     };
   }
 
-  if (!grid[0].length) {
+  if (grid[0].length === 0) {
     return {
       numberOfRows: 0,
       numberOfColumns: 0,

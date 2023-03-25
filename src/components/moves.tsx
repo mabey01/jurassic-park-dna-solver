@@ -1,6 +1,6 @@
 import { useAtom, useAtomValue } from "jotai";
 import { availableMovesAtom, enabledMovesAtom } from "../state/moves";
-import { MoveType } from "../utils/apply-move-to-grid/moves";
+import { type MoveType } from "../utils/apply-move-to-grid/moves";
 import { assertMoveTypeNever } from "../utils/assert-move-type-never";
 
 function getMoveLabel(moveType: MoveType) {

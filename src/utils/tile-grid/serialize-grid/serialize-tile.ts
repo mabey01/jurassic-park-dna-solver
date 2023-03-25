@@ -1,4 +1,4 @@
-import { Tile } from "../../../types";
+import { type Tile } from "../../../types";
 import { isTileType } from "../is-tile-type/is-tile-type";
 
 export function serializeTile(tile: Tile) {

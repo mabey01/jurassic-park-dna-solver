@@ -1,5 +1,5 @@
 import { bench, describe } from "vitest";
-import { MoveType } from "../utils/apply-move-to-grid/moves";
+import { type MoveType } from "../utils/apply-move-to-grid/moves";
 import { generateRandomGrid } from "../utils/generate-random-grid/generate-random-grid";
 import { getGridSolvingPath as getGridSolvingPathFunction } from "./grid-solver-worker-with-open-list-array";
 import { getGridSolvingPath as getGridSolvingPathWithPriorityQueueFunction } from "./grid-solver-worker-with-priority-queue";

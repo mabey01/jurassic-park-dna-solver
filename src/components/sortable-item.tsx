@@ -1,6 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { ComponentProps } from "react";
+import { type ComponentProps } from "react";
 
 interface SortableItemProps extends ComponentProps<"div"> {
   id: string;
@@ -14,11 +14,11 @@ export function SortableItem({ id, children, ...props }: SortableItemProps) {
     setNodeRef,
     transform,
     transition,
-  } = useSortable({ id: id });
+  } = useSortable({ id });
 
   const style = {
     transform: CSS.Transform.toString(
-      transform
+      (transform != null)
         ? isDragging
           ? { ...transform, scaleX: 1.05, scaleY: 1.05 }
           : transform

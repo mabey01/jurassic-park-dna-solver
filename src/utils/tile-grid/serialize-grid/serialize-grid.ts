@@ -1,4 +1,4 @@
-import { TileGrid } from "../../../types";
+import { type TileGrid } from "../../../types";
 import { serializeTile, unserializeTile } from "./serialize-tile";
 
 export function serializeGrid(grid: TileGrid) {

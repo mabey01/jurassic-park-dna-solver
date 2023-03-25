@@ -1,7 +1,7 @@
 import { useSetAtom } from "jotai";
 import { useEffect } from "react";
-import { TileGrid } from "../../types";
-import { Move } from "../../utils/apply-move-to-grid/moves";
+import { type TileGrid } from "../../types";
+import { type Move } from "../../utils/apply-move-to-grid/moves";
 import { SolvingGrid } from "./solving-grid";
 import { SolvingGridPlayControls } from "./solving-grid-play-controls";
 import { SolvingGridProgressBar } from "./solving-grid-progress-bar";

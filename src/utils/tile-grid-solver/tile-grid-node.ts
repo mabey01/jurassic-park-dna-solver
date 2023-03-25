@@ -1,7 +1,5 @@
-import { TileGrid } from "../../types";
-import { Move } from "../apply-move-to-grid/moves";
-import { getFlatGrid } from "../grid/get-flat-grid/get-flat-grid";
-import { serializeGrid } from "../tile-grid/serialize-grid/serialize-grid";
+import { type TileGrid } from "../../types";
+import { type Move } from "../apply-move-to-grid/moves";
 
 export class TileGridNode {
   grid: TileGrid;

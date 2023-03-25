@@ -1,27 +1,27 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { TileGrid } from "../types";
-import { Move, MoveType } from "../utils/apply-move-to-grid/moves";
+import { type TileGrid } from "../types";
+import { type Move, type MoveType } from "../utils/apply-move-to-grid/moves";
 import { isEqual } from "../utils/tile-grid/is-equal/is-equal";
 
-type IdleSolutionState = {
+interface IdleSolutionState {
   state: "idle";
-};
+}
 
-type SolvingSolutionState = {
+interface SolvingSolutionState {
   state: "solving";
-};
+}
 
-type GridsAreEqualSolutionState = {
+interface GridsAreEqualSolutionState {
   state: "grids-are-equal";
-};
+}
 
-export type SolvedSolutionState = {
+export interface SolvedSolutionState {
   state: "solved";
   meta: {
     duration: number;
   };
   solvingPath: Move[];
-};
+}
 
 export type SolutionState =
   | IdleSolutionState
@@ -42,6 +42,7 @@ export function useSolveGrid(
 
   const solverWorkerInstance = useMemo(
     () =>
+      // eslint-disable-next-line @typescript-eslint/consistent-type-imports
       new ComlinkWorker<typeof import("../worker/index")>(
         new URL("../worker", import.meta.url)
       ),
@@ -78,14 +79,14 @@ export function useSolveGrid(
       moves
     );
 
-    const duration_in_ms = Date.now() - startingTime;
+    const durationInMS = Date.now() - startingTime;
 
-    if (!solvingPath) {
+    if (solvingPath == null) {
       console.log("UNSOLVABLE GRID");
       setSolutionState({
         state: "solved",
         meta: {
-          duration: duration_in_ms,
+          duration: durationInMS,
         },
         solvingPath: [],
       });
@@ -93,20 +94,18 @@ export function useSolveGrid(
     }
 
     const timeoutTime =
-      duration_in_ms < MINIMUM_RUNTIME_MS
-        ? MINIMUM_RUNTIME_MS - duration_in_ms
-        : 0;
+      durationInMS < MINIMUM_RUNTIME_MS ? MINIMUM_RUNTIME_MS - durationInMS : 0;
     setTimeout(() => {
       setSolutionState({
         state: "solved",
-        meta: { duration: duration_in_ms },
+        meta: { duration: durationInMS },
         solvingPath,
       });
     }, timeoutTime);
   }, [solutionState, setSolutionState, originGrid, targetGrid, moves]);
 
   useEffect(() => {
-    solveGrid();
+    void solveGrid();
   }, []);
 
   return solutionState;
