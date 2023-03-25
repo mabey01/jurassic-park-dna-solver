@@ -107,9 +107,7 @@ export function TargetGridPage() {
           <Checkbox.Root
             checked={isVerticalSkipMoveEnabled}
             onCheckedChange={(isChecked) => {
-              isChecked !== null
-                ? enableVerticalSkipMove()
-                : disableVerticalSkipMove();
+              isChecked ? enableVerticalSkipMove() : disableVerticalSkipMove();
             }}
             id="enable-vertical-skip-move"
             className="flex h-6 w-6 appearance-none items-center justify-center rounded-md bg-white outline-none hover:bg-neutral-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"

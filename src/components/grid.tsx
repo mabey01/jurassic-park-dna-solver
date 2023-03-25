@@ -14,10 +14,7 @@ import {
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
 import { motion, type Variants } from "framer-motion";
-import { useAtom } from "jotai";
-import { selectedGridEntryPositionAtom } from "../state/selected-grid-entry";
-import { type TileGrid, type GridPosition } from "../types";
-import { isSamePosition } from "../utils/tile-grid/is-same-position";
+import { type TileGrid } from "../types";
 import { moveTileById } from "../utils/tile-grid/move-tile/move-tile-by-id";
 import { SortableItem } from "./sortable-item";
 import { Tile } from "./tile";
@@ -41,10 +38,6 @@ interface GridProps {
 }
 
 export function Grid({ grid, onUpdateGrid }: GridProps) {
-  const [selectedGridItem, setSelectedGridItem] = useAtom(
-    selectedGridEntryPositionAtom
-  );
-
   const sensors = useSensors(
     useSensor(MouseSensor),
     useSensor(TouchSensor),
@@ -70,7 +63,6 @@ export function Grid({ grid, onUpdateGrid }: GridProps) {
 
   const gridColumns = grid[0]!.length;
   const gridItems = grid.flat();
-  const getGridEntryPosition = (index: number): GridPosition => [index, index];
 
   return (
     <DndContext
@@ -96,16 +88,7 @@ export function Grid({ grid, onUpdateGrid }: GridProps) {
                 variants={item}
                 transition={{ type: "spring", stiffness: 800, damping: 30 }}
               >
-                <Tile
-                  type={tile.type}
-                  isSelected={isSamePosition(
-                    getGridEntryPosition(index),
-                    selectedGridItem
-                  )}
-                  onClick={() => {
-                    setSelectedGridItem(getGridEntryPosition(index));
-                  }}
-                />
+                <Tile type={tile.type} />
               </motion.div>
             </SortableItem>
           ))}
