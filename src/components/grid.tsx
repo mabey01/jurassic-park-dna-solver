@@ -49,12 +49,13 @@ export function Grid({ grid, onUpdateGrid }: GridProps) {
   );
 
   const handleDragEnd = ({ active, over }: DragEndEvent) => {
-    if (active.id !== over?.id) {
+    if (!over) return;
+
+    if (active.id !== over.id) {
       const newGrid = moveTileById(
         grid,
         active.id.toString(),
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        over!.id.toString()
+        over.id.toString()
       );
 
       onUpdateGrid(newGrid);

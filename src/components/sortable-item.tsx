@@ -18,7 +18,7 @@ export function SortableItem({ id, children, ...props }: SortableItemProps) {
 
   const style = {
     transform: CSS.Transform.toString(
-      (transform != null)
+      transform != null
         ? isDragging
           ? { ...transform, scaleX: 1.05, scaleY: 1.05 }
           : transform
@@ -29,7 +29,6 @@ export function SortableItem({ id, children, ...props }: SortableItemProps) {
     boxShadow: isDragging
       ? "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)"
       : "",
-    "-webkit-tap-highlight-color": "transparent",
   };
 
   return (
