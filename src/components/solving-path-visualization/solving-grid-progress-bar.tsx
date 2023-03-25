@@ -22,7 +22,7 @@ export function SolvingGridProgressBar() {
       <Slider.Track className="relative h-[3px] grow rounded-full bg-white/20">
         <Slider.Range className="absolute h-full rounded-full bg-white" />
       </Slider.Track>
-      <Slider.Thumb className="block h-4 w-4 cursor-grab rounded-full bg-white drop-shadow-md hover:bg-neutral-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400" />
+      <Slider.Thumb className="block h-4 w-4 cursor-grab rounded-full bg-current drop-shadow-md hover:bg-neutral-200 hover:outline hover:outline-4 hover:outline-offset-0 hover:outline-neutral-400/50 focus-visible:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400" />
     </Slider.Root>
   );
 }
