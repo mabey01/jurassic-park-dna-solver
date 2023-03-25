@@ -41,7 +41,7 @@ export function ErrorPage() {
       <div className="flex justify-end">
         <LinkButton
           to="/"
-          className="bg-red-700 text-neutral-50 hover:bg-neutral-600"
+          className="bg-red-700 text-neutral-50 hover:bg-red-600"
         >
           Start over
         </LinkButton>
