@@ -19,7 +19,7 @@ const DEFAULT_GRID_POSITIONS: Tile[][] = [
     undefined,
     { type: "a", id: getNextId() },
   ],
-  [],
+  [{type: '*', id: getNextId()}],
   [
     {
       type: "t",

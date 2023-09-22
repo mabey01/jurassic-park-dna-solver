@@ -1,5 +1,6 @@
 import { type TileGrid } from "../../types";
 import { type Move } from "../apply-move-to-grid/moves";
+import { isSerializedEqual } from "../tile-grid/is-equal/is-serialized-equal";
 
 export class TileGridNode {
   grid: TileGrid;
@@ -25,6 +26,6 @@ export class TileGridNode {
   }
 
   isEqual(node: TileGridNode) {
-    return this.serialized === node.serialized;
+    return isSerializedEqual(this.serialized, node.serialized);
   }
 }

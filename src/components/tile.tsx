@@ -6,6 +6,7 @@ function getTileBackgroundColor(tileType: TileType) {
   if (tileType === "c") return "#5f909e";
   if (tileType === "g") return "#a36980";
   if (tileType === "t") return "#a0804d";
+  if (tileType === '*') return "#000000"
 }
 
 interface TileProps extends ComponentProps<"div"> {
