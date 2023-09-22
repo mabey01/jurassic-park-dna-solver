@@ -34,7 +34,7 @@ const DEFAULT_GRID_POSITIONS: Tile[][] = [
   ],
 ];
 
-const numberOfDefaultTiles = DEFAULT_GRID_POSITIONS.flat().length;
+const numberOfDefaultTiles = DEFAULT_GRID_POSITIONS.flat().filter(Boolean).length;
 
 export function generateDefaultGrid(
   numberOfRows = 3,
