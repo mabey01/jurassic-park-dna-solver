@@ -15,15 +15,18 @@ const getNextId = () => idGenerator.next().value;
 const DEFAULT_GRID_POSITIONS: Tile[][] = [
   [
     { type: "g", id: getNextId() },
+    //@ts-ignore
+    undefined,
     { type: "a", id: getNextId() },
   ],
-  [],
   [],
   [
     {
       type: "t",
       id: getNextId(),
     },
+    // @ts-ignore
+    undefined,
     {
       type: "c",
       id: getNextId(),
@@ -34,8 +37,8 @@ const DEFAULT_GRID_POSITIONS: Tile[][] = [
 const numberOfDefaultTiles = DEFAULT_GRID_POSITIONS.flat().length;
 
 export function generateDefaultGrid(
-  numberOfRows = 4,
-  numberOfColumns = 2
+  numberOfRows = 3,
+  numberOfColumns = 3
 ): TileGrid {
   const tileValues: TileType[] = getTileValues(
     numberOfRows * numberOfColumns - numberOfDefaultTiles
